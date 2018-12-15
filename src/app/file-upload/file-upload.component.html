@@ -1,0 +1,32 @@
+<br>
+<label class="btn btn-default">
+        <input type="file" (change)="selectFile($event)">
+</label>
+<br>
+<br>    
+<button mat-raised-button class="btn btn-success" [disabled]="!selectedFiles" (click)="upload()">Upload</button>
+<br/>
+<br/>
+<mat-card class="example-card" *ngIf="selected">
+<mat-card-header>
+    <mat-card-title>Resume's Processed Response</mat-card-title>
+</mat-card-header>
+<mat-card-content>
+    <div>
+        <table [(ngModel)]="fileResultResponse" *ngIf="responseRetrieved" style="width:50%">
+            <tr>
+                <th>Matching Skillset</th>
+                <th>fileResultResponse.profile_category_match_skillset</th> 
+            </tr>
+            <tr>
+                <th>Profile Category</th>
+                <th>fileResultResponse.profile_category</th> 
+            </tr>
+            <tr>
+                <th>Profile Score</th>
+                <th>fileResultResponse.profile_category_score</th> 
+            </tr>        
+        </table>
+    </div>
+</mat-card-content>
+</mat-card>
