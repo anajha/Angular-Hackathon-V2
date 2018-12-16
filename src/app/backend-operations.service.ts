@@ -20,7 +20,7 @@ export class BackendOperationsService {
     return this.http.get(this.analyzeUrl,{
       params: {
         file_name: fileName,
-        user_name: "userName"
+        user_name: "admin"
       }});
   }
   public fileAnalysisResponse(fileName)
@@ -28,7 +28,7 @@ export class BackendOperationsService {
     return this.http.get(this.resultUrl,{
       params: {
       file_name: fileName,
-      user_name: "userName"
+      user_name: "admin"
     }})
   }
 }
