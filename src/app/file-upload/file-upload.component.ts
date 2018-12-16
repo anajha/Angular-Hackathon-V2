@@ -12,6 +12,7 @@ import { AlertsService } from 'angular-alert-module';
 })
 export class FileUploadComponent implements OnInit {
 
+  successfullyUploaded:boolean;
   responseRetrieved:boolean;
   fileResultResponse:FileResultResponse;
   fileAnalyzeResponse: FileAnalyzeResponse;
@@ -31,16 +32,28 @@ export class FileUploadComponent implements OnInit {
     console.log("We are moving further");
     this.backendService.fileAnalyze(file.name)
     .subscribe((fileAnalyzeResponse:FileAnalyzeResponse)=>{
-      if(fileAnalyzeResponse.getResponse()=="Resume profile classified successfully")
+      console.log(fileAnalyzeResponse);
+      if(fileAnalyzeResponse.response==="Resume profile classified successfully")
       {
         this.backendService.fileAnalysisResponse(file.name)
         .subscribe((fileResultResponse:FileResultResponse)=>{
+          console.log(fileResultResponse);
           this.responseRetrieved=true;
-          this.alerts.setDefaults('timeout',5);
-          this.alerts.setMessage(fileResultResponse.getResponse(),'success');
           this.fileResultResponse=fileResultResponse;
-      })
+          this.alerts.setDefaults('timeout',5);
+          this.alerts.setMessage(fileResultResponse.response,'success');
+          this.fileResultResponse=fileResultResponse;
       }
+      )
+      }
+      else{
+        this.alerts.setDefaults('timeout',5);
+        this.alerts.setMessage("Resume classification could not be performed on this document. Try another one",'success');
+      }
+      },
+      error=>{
+        this.alerts.setDefaults('timeout',5);
+        this.alerts.setMessage("Error occurred while processing resume",'error');
       }) 
   }
 

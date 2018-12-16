@@ -3,6 +3,7 @@ export class FileResultResponse{
     profile_category:string;
     profile_category_score:string;
     response:string;
+    filename:string;
 
     setSkillSet(profile_category_match_skillset:string[])
     {
@@ -40,5 +41,13 @@ export class FileResultResponse{
     getResponse()
     {
         return this.response;
+    }
+    setFileName(filename:string)
+    {
+        this.filename=filename;
+    }
+    getFileName()
+    {
+        return this.filename;
     }
 }
