@@ -43,12 +43,14 @@ import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { UploadFileService } from './upload-file.service';
+import { ManageCategoriesComponent } from './manage-categories/manage-categories.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
-    FileUploadComponent
+    FileUploadComponent,
+    ManageCategoriesComponent
   ],
   imports: [
     HttpModule,

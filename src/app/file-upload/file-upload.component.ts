@@ -30,29 +30,29 @@ export class FileUploadComponent implements OnInit {
     const file = this.selectedFiles.item(0);
     this.uploadService.uploadfile(file);
     console.log("We are moving further");
-    this.backendService.fileAnalyze(file.name)
+    this.backendService.fileAnalyze(file.name,"admin")
     .subscribe((fileAnalyzeResponse:FileAnalyzeResponse)=>{
       console.log(fileAnalyzeResponse);
       if(fileAnalyzeResponse.response==="Resume profile classified successfully")
       {
-        this.backendService.fileAnalysisResponse(file.name)
+        this.backendService.fileAnalysisResponse(file.name,"admin")
         .subscribe((fileResultResponse:FileResultResponse)=>{
           console.log(fileResultResponse);
           this.responseRetrieved=true;
           this.fileResultResponse=fileResultResponse;
-          this.alerts.setDefaults('timeout',5);
+          this.alerts.setDefaults('timeout',10);
           this.alerts.setMessage(fileResultResponse.response,'success');
           this.fileResultResponse=fileResultResponse;
       }
       )
       }
       else{
-        this.alerts.setDefaults('timeout',5);
+        this.alerts.setDefaults('timeout',10);
         this.alerts.setMessage("Resume classification could not be performed on this document. Try another one",'success');
       }
       },
       error=>{
-        this.alerts.setDefaults('timeout',5);
+        this.alerts.setDefaults('timeout',10);
         this.alerts.setMessage("Error occurred while processing resume",'error');
       }) 
   }

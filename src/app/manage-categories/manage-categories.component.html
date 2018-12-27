@@ -1,0 +1,42 @@
+<form [formGroup]="manageCategoryForm">
+  <mat-form-field>
+    <mat-select placeholder="Profile Category List" formControlName="profileTypeOption">
+      <mat-option *ngFor="let pt of profileTypes" [value]="pt.value" (onSelectionChange)="getCategoryKeywords($event,pt.value)">
+        {{pt.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Enter Profile Category" formControlName="profileType">
+  </mat-form-field>
+  <button mat-raised-button color="warn" (click)="addNewProfileType()">Add</button>  
+  <button mat-raised-button color="warn" (click)="removeProfileType()">Remove</button>
+  <p></p>
+  <mat-card class="example-card" *ngIf="selected">
+    <mat-card-header>
+      <mat-card-title>Keyword Repository for {{manageCategoryForm.value.profileTypeOption|uppercase}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div>
+        <table>
+            <tr> 
+                <th>{{categoryresponse.profile_category}}</th>
+            </tr>  
+        </table>
+      </div>
+      <p></p>
+      <div formArrayName="keywords">
+        <div *ngFor="let keyword of manageProfileKeywordForms.controls; let i=index" [formGroupName]="i">
+          <mat-form-field class="xs">
+            <input matInput placeholder="Profile Keyword" formControlName="profileKeyword">
+          </mat-form-field>
+          <button mat-raised-button color="warn" (click)="deleteNewKeyword()">Delete</button>
+        </div>
+      </div>
+      <button mat-raised-button color="primary" (click)="addNewKeyword()">Add</button>
+      <button *ngIf="keywordpresent" mat-raised-button color="primary" (click)="saveNewKeywords()">Save</button>
+      <button *ngIf="keywordpresent" mat-raised-button color="primary" (click)="removeKeywords()">Remove</button>    
+    </mat-card-content>
+  </mat-card>
+  <app-alerts></app-alerts>
+</form>
